@@ -49,17 +49,24 @@
                 max-width: 50rem;
             }
 
-            .build .category {
-                border-radius: 6px;
-                padding: 0.5rem;
+            .row {
                 gap: 1rem;
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 margin: 1rem 0;
             }
 
-            .build .category .name {
+            .span3 {
+                grid-column: span 3;
+            }
+
+            .span4 {
                 grid-column: span 4;
+            }
+
+            .build .category {
+                border-radius: 6px;
+                padding: 0.5rem;
             }
 
             .build .category.one {
@@ -98,35 +105,38 @@
                     <img src="https://cdn.betterttv.net/emote/58ae8407ff7b7276f8e594f2/1x.webp" alt="pog" />
                 </h1>
                 <form>
-                    <div class="category one">
-                        <div class="name"><input required type="text" name="category.0.name" placeholder="Nome da categoria" /></div>
-                        <div class="word"><input required type="text" name="category.0.words.0" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.0.words.1" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.0.words.2" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.0.words.3" placeholder="Palavra" /></div>
+                    <div class="row category one">
+                        <input class="name span4" required type="text" placeholder="Nome da categoria" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <div class="category two">
-                        <div class="name"><input required type="text" name="category.1.name" placeholder="Nome da categoria" /></div>
-                        <div class="word"><input required type="text" name="category.1.words.0" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.1.words.1" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.1.words.2" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.1.words.3" placeholder="Palavra" /></div>
+                    <div class="row category two">
+                        <input class="name span4" required type="text" placeholder="Nome da categoria" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <div class="category three">
-                        <div class="name"><input required type="text" name="category.2.name" placeholder="Nome da categoria" /></div>
-                        <div class="word"><input required type="text" name="category.2.words.0" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.2.words.1" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.2.words.2" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.2.words.3" placeholder="Palavra" /></div>
+                    <div class="row category three">
+                        <input class="name span4" required type="text" placeholder="Nome da categoria" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <div class="category four">
-                        <div class="name"><input required type="text" name="category.3.name" placeholder="Nome da categoria" /></div>
-                        <div class="word"><input required type="text" name="category.3.words.0" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.3.words.1" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.3.words.2" placeholder="Palavra" /></div>
-                        <div class="word"><input required type="text" name="category.3.words.3" placeholder="Palavra" /></div>
+                    <div class="row category four">
+                        <input class="name span4" required type="text" placeholder="Nome da categoria" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
+                        <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <button type="submit">Pegar link</button>
+                    <div class="row link">
+                        <button type="submit">Pegar link</button>
+                        <input class="span3" readonly type="text" />
+                    </div>
                 </form>
             </div>
 
@@ -144,7 +154,21 @@
                 document.querySelector('.build').classList.remove('hidden');
                 document.querySelector('.build form').addEventListener('submit', (event) => {
                     event.preventDefault();
-                    // todo
+                    const categories = [];
+                    document.querySelectorAll('.build .category').forEach((elem) => {
+                        categories.push({
+                            name: elem.querySelector('.name').value,
+                            words: Array.from(elem.querySelectorAll('.word')).map(input => input.value),
+                        });
+                    });
+                    const urlParam = encodeURIComponent(btoa(JSON.stringify(categories)));
+                    const playUrl = new URL(location);
+                    playUrl.hash = `#play/${urlParam}`;
+
+                    const linkInput = document.querySelector('.build .link input');
+                    linkInput.value = playUrl.href;
+                    linkInput.focus();
+                    linkInput.select();
                 });
             }
         </script>
