@@ -95,6 +95,28 @@
                 font-weight: bold;
                 text-transform: uppercase;
             }
+
+            .play .board {
+                gap: 1rem;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 5rem);
+            }
+
+            .play .board .card {
+                border: 0;
+                border-radius: 6px;
+                padding: .5rem 1rem;
+                cursor: pointer;
+                background: #ffffff44;
+                color: #fff;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            .play .board .card.selected {
+                background: #77aaffff;
+            }
         </style>
     </head>
     <body>
@@ -145,11 +167,35 @@
                     Você foi desafiado a resolver esse ajunta 
                     <img src="https://cdn.betterttv.net/emote/56e9f494fff3cc5c35e5287e/1x.webp" alt="eita" />
                 </h1>
+                <div class="board">
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card selected">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card selected">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card">Palavra</button>
+                </div>
             </div>
         </main>
         <script>
             if (location.hash.startsWith('#play/')) {
                 document.querySelector('.play').classList.remove('hidden');
+
+                document.querySelector('.play .board').addEventListener('click', (event) => {
+                    if (event.target.classList.contains('card')) {
+                        event.target.classList.toggle('selected');
+                    }
+                });
             } else {
                 document.querySelector('.build').classList.remove('hidden');
                 document.querySelector('.build form').addEventListener('submit', (event) => {
