@@ -76,23 +76,23 @@
                 padding: 0.5rem;
             }
 
-            .build .category.one,
-            .play .hit.one {
+            .build .category.orange,
+            .play .hit.orange {
                 background-color: #ff9800;
             }
 
-            .build .category.two,
-            .play .hit.two {
+            .build .category.green,
+            .play .hit.green {
                 background-color: #7cb342;
             }
 
-            .build .category.three,
-            .play .hit.three {
+            .build .category.blue,
+            .play .hit.blue {
                 background-color: #2196f3;
             }
 
-            .build .category.four,
-            .play .hit.four {
+            .build .category.purple,
+            .play .hit.purple {
                 background-color: #ab47bc;
             }
 
@@ -165,28 +165,28 @@
                     <img src="https://cdn.betterttv.net/emote/58ae8407ff7b7276f8e594f2/1x.webp" alt="pog" />
                 </h1>
                 <form>
-                    <div class="row category one">
+                    <div class="row category orange">
                         <input class="name span4" required type="text" placeholder="Nome da categoria" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <div class="row category two">
+                    <div class="row category green">
                         <input class="name span4" required type="text" placeholder="Nome da categoria" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <div class="row category three">
+                    <div class="row category blue">
                         <input class="name span4" required type="text" placeholder="Nome da categoria" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
                     </div>
-                    <div class="row category four">
+                    <div class="row category purple">
                         <input class="name span4" required type="text" placeholder="Nome da categoria" />
                         <input class="word" required type="text" placeholder="Palavra" />
                         <input class="word" required type="text" placeholder="Palavra" />
@@ -262,7 +262,7 @@
 
                         if (hitIndex !== -1) {
                             const hit = categories[hitIndex];
-                            const colors = ['one', 'two', 'three', 'four'];
+                            const colors = ['orange', 'green', 'blue', 'purple'];
                             const hitEl = document.createElement('div');
                             hitEl.classList.add('hit');
                             hitEl.classList.add(colors[hitIndex]);
