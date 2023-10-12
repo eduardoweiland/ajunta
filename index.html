@@ -176,27 +176,34 @@
                     <img src="https://cdn.betterttv.net/emote/56e9f494fff3cc5c35e5287e/1x.webp" alt="eita" />
                 </h1>
                 <div class="board">
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card selected">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card selected">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
-                    <button type="button" class="card">Palavra</button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
+                    <button type="button" class="card"></button>
                 </div>
             </div>
         </main>
         <script>
             if (location.hash.startsWith('#play/')) {
+                const categories = JSON.parse(atob(decodeURIComponent(location.hash.substr('#play/'.length))));
+                const words = categories.flatMap((cat) => cat.words).sort(() => Math.random() > 0.5 ? -1 : 1);
+
+                document.querySelectorAll('.play .board .card').forEach((card, index) => {
+                    card.innerText = words[index];
+                });
+
                 document.querySelector('.play').classList.remove('hidden');
 
                 document.querySelector('.play .board').addEventListener('click', (event) => {
