@@ -76,19 +76,23 @@
                 padding: 0.5rem;
             }
 
-            .build .category.one {
+            .build .category.one,
+            .play .hit.one {
                 background-color: #ff9800;
             }
 
-            .build .category.two {
+            .build .category.two,
+            .play .hit.two {
                 background-color: #7cb342;
             }
 
-            .build .category.three {
+            .build .category.three,
+            .play .hit.three {
                 background-color: #2196f3;
             }
 
-            .build .category.four {
+            .build .category.four,
+            .play .hit.four {
                 background-color: #ab47bc;
             }
 
@@ -123,6 +127,17 @@
 
             .play .board .card.selected {
                 background: #77aaffff;
+            }
+
+            .play .board .hit {
+                border-radius: 6px;
+                padding: 0.5rem;
+                grid-column: span 4;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
         </style>
     </head>
@@ -195,6 +210,7 @@
                 </div>
             </div>
         </main>
+
         <script>
             if (location.hash.startsWith('#play/')) {
                 const categories = JSON.parse(atob(decodeURIComponent(location.hash.substr('#play/'.length))));
@@ -206,9 +222,31 @@
 
                 document.querySelector('.play').classList.remove('hidden');
 
-                document.querySelector('.play .board').addEventListener('click', (event) => {
+                const board = document.querySelector('.play .board');
+                board.addEventListener('click', (event) => {
                     if (event.target.classList.contains('card')) {
                         event.target.classList.toggle('selected');
+                    }
+
+                    const selected = document.querySelectorAll('.play .board .card.selected');
+                    if (selected.length === 4) {
+                        const selectedWords = Array.from(selected).map((el) => el.innerText.toLocaleUpperCase());
+                        const hitIndex = categories.findIndex(
+                            (cat) => cat.words.every((word) => selectedWords.includes(word.toLocaleUpperCase())),
+                        );
+
+                        if (hitIndex !== -1) {
+                            const hit = categories[hitIndex];
+                            const colors = ['one', 'two', 'three', 'four'];
+                            const hitEl = document.createElement('div');
+                            hitEl.classList.add('hit');
+                            hitEl.classList.add(colors[hitIndex]);
+                            hitEl.innerHTML = `<b>${hit.name}</b><span>${hit.words.join(', ')}</span>`;
+                            board.insertBefore(hitEl, board.querySelector('.card'));
+                            selected.forEach((card) => board.removeChild(card));
+                        } else {
+                            selected.forEach((card) => card.classList.remove('selected'));
+                        }
                     }
                 });
             } else {
