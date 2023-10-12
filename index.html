@@ -212,9 +212,18 @@
         </main>
 
         <script>
+            function shuffle(array) {
+                for (let curIndex = array.length - 1; curIndex >= 0; --curIndex) {
+                    const randomIndex = Math.ceil(Math.random() * curIndex);
+                    [array[curIndex], array[randomIndex]] = [array[randomIndex], array[curIndex]];
+                }
+
+                return array;
+            }
+
             if (location.hash.startsWith('#play/')) {
                 const categories = JSON.parse(atob(decodeURIComponent(location.hash.substr('#play/'.length))));
-                const words = categories.flatMap((cat) => cat.words).sort(() => Math.random() > 0.5 ? -1 : 1);
+                const words = shuffle(categories.flatMap((cat) => cat.words));
 
                 document.querySelectorAll('.play .board .card').forEach((card, index) => {
                     card.innerText = words[index];
