@@ -146,7 +146,12 @@
                 align-items: center;
                 justify-content: center;
             }
-            
+
+            .play .tries {
+                text-align: center;
+                margin-top: 0.5rem;
+            }
+
             .play .nope {
                 background: #ff4444ff;
                 color: #fff;
@@ -224,6 +229,7 @@
                     <button type="button" class="card"></button>
                     <button type="button" class="card"></button>
                 </div>
+                <div class="tries"></div>
                 <div class="nope hidden">NOPE</div>
             </div>
         </main>
@@ -264,16 +270,19 @@
                         if (hitIndex !== -1) {
                             const hit = categories[hitIndex];
                             const colors = ['orange', 'green', 'blue', 'purple'];
+                            const emojis = ['🟧', '🟩', '🟦', '🟪'];
                             const hitEl = document.createElement('div');
                             hitEl.classList.add('hit');
                             hitEl.classList.add(colors[hitIndex]);
                             hitEl.innerHTML = `<b>${hit.name}</b><span>${hit.words.join(', ')}</span>`;
                             board.insertBefore(hitEl, board.querySelector('.card'));
                             selected.forEach((card) => board.removeChild(card));
+                            document.querySelector('.play .tries').innerText += emojis[hitIndex];
                         } else {
                             selected.forEach((card) => card.classList.remove('selected'));
                             document.querySelector('.play .nope').classList.remove('hidden');
                             setTimeout(() => document.querySelector('.play .nope').classList.add('hidden'), 1500);
+                            document.querySelector('.play .tries').innerText += '❌';
                         }
                     }
                 });
