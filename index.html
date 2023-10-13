@@ -97,7 +97,9 @@
                 background-color: #ab47bc;
             }
 
-            .build button {
+            .build button,
+            .play .board .card,
+            .play .copy button {
                 border: 0;
                 border-radius: 6px;
                 padding: .5rem 1rem;
@@ -121,17 +123,6 @@
                 grid-template-rows: repeat(4, 5rem);
             }
 
-            .play .board .card {
-                border: 0;
-                border-radius: 6px;
-                padding: .5rem 1rem;
-                cursor: pointer;
-                background: #ffffff44;
-                color: #fff;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
             .play .board .card.selected {
                 background: #77aaffff;
             }
@@ -147,7 +138,8 @@
                 justify-content: center;
             }
 
-            .play .tries {
+            .play .tries,
+            .play .copy {
                 text-align: center;
                 margin-top: 0.5rem;
             }
@@ -230,6 +222,9 @@
                     <button type="button" class="card"></button>
                 </div>
                 <div class="tries"></div>
+                <div class="copy hidden">
+                    <button type="button">COPIAR</button>
+                </div>
                 <div class="nope hidden">NOPE</div>
             </div>
         </main>
@@ -255,6 +250,8 @@
                 document.querySelector('.play').classList.remove('hidden');
 
                 const board = document.querySelector('.play .board');
+                let tries = 0;
+
                 board.addEventListener('click', (event) => {
                     if (event.target.classList.contains('card')) {
                         event.target.classList.toggle('selected');
@@ -267,6 +264,8 @@
                             (cat) => cat.words.every((word) => selectedWords.includes(word.toLocaleUpperCase())),
                         );
 
+                        tries++;
+
                         if (hitIndex !== -1) {
                             const hit = categories[hitIndex];
                             const colors = ['orange', 'green', 'blue', 'purple'];
@@ -278,6 +277,15 @@
                             board.insertBefore(hitEl, board.querySelector('.card'));
                             selected.forEach((card) => board.removeChild(card));
                             document.querySelector('.play .tries').innerText += emojis[hitIndex];
+
+                            if (!board.querySelector('.card')) {
+                                document.querySelector('.play .copy button').addEventListener('click', () => {
+                                    const emojiTries = document.querySelector('.play .tries').innerText;
+                                    const text = `Venci esse ajunta em ${tries} tentativas!\n${emojiTries}\n${location.href}`;
+                                    navigator.clipboard.writeText(text);
+                                });
+                                document.querySelector('.play .copy').classList.remove('hidden');
+                            }
                         } else {
                             selected.forEach((card) => card.classList.remove('selected'));
                             document.querySelector('.play .nope').classList.remove('hidden');
