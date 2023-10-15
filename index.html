@@ -259,9 +259,9 @@
 
                     const selected = document.querySelectorAll('.play .board .card.selected');
                     if (selected.length === 4) {
-                        const selectedWords = Array.from(selected).map((el) => el.innerText.toLocaleUpperCase());
+                        const selectedWords = Array.from(selected).map((el) => el.innerText.toLocaleUpperCase().trim());
                         const hitIndex = categories.findIndex(
-                            (cat) => cat.words.every((word) => selectedWords.includes(word.toLocaleUpperCase())),
+                            (cat) => cat.words.every((word) => selectedWords.includes(word.toLocaleUpperCase().trim())),
                         );
 
                         tries++;
@@ -302,7 +302,7 @@
                     document.querySelectorAll('.build .category').forEach((elem) => {
                         categories.push({
                             name: elem.querySelector('.name').value,
-                            words: Array.from(elem.querySelectorAll('.word')).map(input => input.value),
+                            words: Array.from(elem.querySelectorAll('.word')).map(input => input.value.trim()),
                         });
                     });
                     const urlParam = encodeURIComponent(btoa(JSON.stringify(categories)));
