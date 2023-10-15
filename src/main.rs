@@ -1,5 +1,5 @@
-use silkenweb::{elements::html::p, mount, prelude::ParentElement};
+use silkenweb::{elements::html::p, mount, prelude::ParentElement, router};
 
 fn main() {
-    mount("app", p().text("Hello, world!"));
+    mount("app", p().text(router::url_path().get_cloned().hash()));
 }
