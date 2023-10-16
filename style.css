@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'DejaVu Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('DejaVu Sans'),
+         url('https://fonts.cdnfonts.com/s/107/DejaVuSans.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'DejaVu Sans Mono';
+    font-style: normal;
+    font-weight: 700;
+    src: local('DejaVu Sans Mono Bold'),
+         local('DejaVu Sans Mono'),
+         url('https://fonts.cdnfonts.com/s/108/DejaVuSansMono-Bold.woff') format('woff');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1e1b31;
+    color: #e4f2ff;
+    font-family: 'DejaVu Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 40rem;
+}
+
+header {
+    display: flex;
+    height: 3rem;
+    align-items: center;
+}
+
+header .logo {
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -3px;
+}

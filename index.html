@@ -155,9 +155,15 @@
         </style>
 
         <link rel="rust" data-trunk data-wasm-opt="z" data-weak-refs />
+        <link data-trunk rel="css" href="style.css" />
         <base data-trunk-public-url />
     </head>
+
     <body>
+        <!-- for WASM version -->
+        <div id="app"></div>
+
+        <!-- old version below -->
         <main class="container">
             <div class="alert">EM DESENVOLVIMENTO</div>
             <div class="build hidden">
@@ -319,8 +325,5 @@
                 });
             }
         </script>
-
-        <!-- WASM version below -->
-        <div id="app"></div>
     </body>
 </html>
