@@ -44,3 +44,50 @@ header .logo {
     font-size: 26px;
     letter-spacing: -3px;
 }
+
+input {
+    width: 100%;
+    background-color: #ffffff44;
+    color: #000;
+    border: 0;
+    padding: .5rem 1rem;
+    border-radius: 6px;
+    transition: background-color linear 0.1s;
+}
+
+input:hover, input:focus {
+    background-color: #ffffff88;
+}
+
+input:focus {
+    outline: 2px solid #00378c;
+}
+
+.orange {
+    background-color: #ff9800;
+}
+
+.green {
+    background-color: #7cb342;
+}
+
+.blue {
+    background-color: #2196f3;
+}
+
+.purple {
+    background-color: #ab47bc;
+}
+
+.builder-row {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.builder-row > input:first-of-type {
+    grid-column: span 4;
+}

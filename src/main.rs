@@ -41,7 +41,21 @@ fn play_view() -> Div {
 }
 
 fn build_view() -> Div {
-    div().text("let's build it")
+    div()
+        .child(builder_row().class(class::ORANGE))
+        .child(builder_row().class(class::GREEN))
+        .child(builder_row().class(class::BLUE))
+        .child(builder_row().class(class::PURPLE))
+}
+
+fn builder_row() -> Div {
+    div()
+        .class("builder-row")
+        .child(input().required(true).placeholder("Nome da categoria"))
+        .child(input().required(true).placeholder("Palavra"))
+        .child(input().required(true).placeholder("Palavra"))
+        .child(input().required(true).placeholder("Palavra"))
+        .child(input().required(true).placeholder("Palavra"))
 }
 
 fn not_found() -> Div {
