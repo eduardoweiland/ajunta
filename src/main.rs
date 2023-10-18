@@ -22,8 +22,8 @@ fn router_view() -> Main {
             home_view()
         } else if path.hash().starts_with("play/") {
             play_view()
-        } else if path.hash().eq("build") {
-            build_view()
+        } else if path.hash().eq("builder") {
+            builder_view()
         } else {
             not_found()
         }
@@ -40,7 +40,7 @@ fn play_view() -> Div {
     div().text("let's play")
 }
 
-fn build_view() -> Div {
+fn builder_view() -> Div {
     div()
         .child(builder_row().class(class::ORANGE))
         .child(builder_row().class(class::GREEN))
