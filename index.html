@@ -241,7 +241,10 @@
                 return array;
             }
 
-            if (location.hash.startsWith('#play/')) {
+            if (location.protocol === 'http:') {
+                location.protocol = 'https:';
+            }
+            else if (location.hash.startsWith('#play/')) {
                 const categories = JSON.parse(atob(decodeURIComponent(location.hash.substr('#play/'.length))));
                 const words = shuffle(categories.flatMap((cat) => cat.words));
 
