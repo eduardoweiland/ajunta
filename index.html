@@ -9,6 +9,7 @@
             body {
                 background-color: #1e1b31;
                 font-family: sans;
+                color: #fff;
             }
 
             * {
@@ -24,7 +25,7 @@
                 vertical-align: middle;
             }
 
-            input {
+            input, textarea {
                 width: 100%;
                 background-color: #ffffff44;
                 color: #000;
@@ -283,7 +284,22 @@
                                 document.querySelector('.play .copy button').addEventListener('click', () => {
                                     const emojiTries = document.querySelector('.play .tries').innerText;
                                     const text = `Venci esse ajunta em ${tries} tentativas!\n${emojiTries}\n${location.href}`;
-                                    navigator.clipboard.writeText(text);
+                                    (navigator.clipboard?.writeText(text) || Promise.reject()).then(
+                                        () => {
+                                            document.querySelector('.play .copy').innerText = 'Copiado com sucesso';
+                                        },
+                                        () => {
+                                            const p = document.createElement('p');
+                                            p.innerText = 'Seu navegador não permite copiar o texto automaticamente';
+                                            const textarea = document.createElement('textarea');
+                                            textarea.readOnly = true;
+                                            textarea.autofocus = true;
+                                            textarea.rows = 6;
+                                            textarea.value = text;
+                                            textarea.select();
+                                            document.querySelector('.play .copy').replaceChildren(p, textarea);
+                                        },
+                                    );
                                 });
                                 document.querySelector('.play .copy').classList.remove('hidden');
                             }
